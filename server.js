@@ -2,23 +2,19 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const { port } = require('./etc/config.json');
+
 const app = express();
 
 app.use(bodyParser.text());
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/client.js', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client.js'));
-});
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
-app.get('/style.css', (req, res) => {
-  res.sendFile(path.join(__dirname + '/style.css'));
-});
-
-app.post('/', (req, res) => {
+app.post('/run', (req, res) => {
   try {
     const result = eval(req.body);
 
@@ -26,17 +22,18 @@ app.post('/', (req, res) => {
       result
         .then(value => res.send(String(value)))
         .catch((err) => {
-          res.status(500);
-          res.send(err.message);
-        })
+          res.error(500, err.stack);
+        });
+
+      return;
     }
 
+    res.send(result);
   } catch(err) {
-    res.status(500);
-    res.send(err.message);
+    res.error(500, err.stack);
   }
 });
 
-app.listen(3000, () => {
-  console.log('App listening at port 3000.');
+app.listen(port, () => {
+  console.log(`Remote node is listening at port ${port}.`);
 });

@@ -11,7 +11,7 @@ function main() {
 }
 
 function runCode(code) {
-  fetch('http://localhost:3000', {
+  fetch('/run', {
     method: 'POST',
     body: code
   })
