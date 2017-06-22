@@ -7,32 +7,33 @@
 </template>
 
 <script>
-import CodeInput from './CodeInput.vue'
-import Results from './Results.vue'
+  import CodeInput from './CodeInput.vue'
+  import Results from './Results.vue'
 
-export default {
+  export default {
     name: 'app',
     components: { CodeInput, Results }
-}
+  }
 </script>
 
-<style>
-html {
-    font-size: 62.5%;
-}
+<style lang="scss">
+    @import './variables';
 
-body {
-    margin: 0;
-    background-color: #333;
-    color: #fff;
-    font-family: Roboto, sans-serif;
-    font-size: 1.6rem;
-}
+    html {
+        font-size: 62.5%;
+    }
 
-.title {
-    color: #eee;
-    font-size: 2.6rem;
-    margin: 2rem 0 0;
-    padding: 0 1.4rem;
-}
+    body {
+        margin: 0;
+        background-color: #333;
+        color: $color-white;
+        font-family: Roboto, sans-serif;
+        font-size: 1.6rem;
+    }
+
+    .title {
+        font-size: 2.6rem;
+        margin: $size-xl 0 0;
+        padding: 0 $size-s;
+    }
 </style>
