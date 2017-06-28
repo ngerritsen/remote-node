@@ -10,10 +10,10 @@ const app = express();
 app.use(bodyParser.text());
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
+  res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-app.use('/', express.static(path.join(__dirname, '../public')));
+app.use('/', express.static(path.join(__dirname, '../client')));
 
 app.post('/run', (req, res) => {
   runCode(req.body)
